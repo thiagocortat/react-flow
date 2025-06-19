@@ -16,6 +16,7 @@ import ConditionNode from './nodes/ConditionNode';
 import MergeNode from './nodes/MergeNode';
 import OutputNode from './nodes/OutputNode';
 import Sidebar from './Sidebar';
+import flowTemplates, { FlowTemplate } from '../examples/flowTemplates';
 import { useExecutionStore } from '../store';
 
 let id = 0;
@@ -63,6 +64,11 @@ export default function ApiFlow() {
     } catch {}
   };
 
+  const loadTemplate = (template: FlowTemplate) => {
+    setNodes(template.nodes);
+    setEdges(template.edges);
+  };
+
   const executeFlow = async () => {
     resetResults();
     const { setResult, results } = useExecutionStore.getState();
@@ -100,7 +106,11 @@ export default function ApiFlow() {
               headers,
               body: data.body && data.method !== 'GET' ? data.body : undefined,
             });
-            output = await res.json();
+            let body: any = undefined;
+            try {
+              body = await res.json();
+            } catch {}
+            output = { status: res.status, data: body };
           } catch (e) {
             output = { error: String(e) };
           }
@@ -155,7 +165,14 @@ export default function ApiFlow() {
 
   return (
     <div className="w-screen h-screen flex">
-      <Sidebar onAdd={addNode} onRun={executeFlow} onSave={saveFlow} onLoad={loadFlow} />
+      <Sidebar
+        onAdd={addNode}
+        onRun={executeFlow}
+        onSave={saveFlow}
+        onLoad={loadFlow}
+        templates={flowTemplates}
+        onLoadTemplate={loadTemplate}
+      />
       <div className="flex-1 h-full">
         <ReactFlow
           nodeTypes={nodeTypes}
