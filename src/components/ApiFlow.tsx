@@ -48,10 +48,12 @@ export default function ApiFlow() {
       data: {},
     };
     setNodes((nds) => [...nds, newNode]);
+    console.log('Added node', newNode);
   };
 
   const saveFlow = () => {
     localStorage.setItem('flow', JSON.stringify({ nodes, edges }));
+    console.log('Flow saved', { nodes, edges });
   };
 
   const loadFlow = () => {
@@ -61,15 +63,20 @@ export default function ApiFlow() {
       const { nodes: n, edges: e } = JSON.parse(raw);
       setNodes(n || []);
       setEdges(e || []);
-    } catch {}
+      console.log('Flow loaded from storage', { nodes: n, edges: e });
+    } catch (e) {
+      console.error('Failed to load flow', e);
+    }
   };
 
   const loadTemplate = (template: FlowTemplate) => {
     setNodes(template.nodes);
     setEdges(template.edges);
+    console.log('Template loaded', template);
   };
 
   const executeFlow = async () => {
+    console.log('Executing flow...');
     resetResults();
     const { setResult, results } = useExecutionStore.getState();
 
@@ -148,6 +155,7 @@ export default function ApiFlow() {
       }
 
       setResult(node.id, output);
+      console.log('Node executed', node.id, output);
       executed.add(node.id);
 
       outgoing(node.id).forEach((edge) => {
