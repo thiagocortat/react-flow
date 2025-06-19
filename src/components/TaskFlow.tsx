@@ -1,5 +1,6 @@
-import { useCallback, useState } from 'react';
-import ReactFlow, {
+import React, { useState, useCallback } from 'react';
+import {
+  ReactFlow,
   Background,
   Controls,
   addEdge,
@@ -8,7 +9,7 @@ import ReactFlow, {
   Node,
   useEdgesState,
   useNodesState,
-} from 'react-flow-renderer';
+} from '@xyflow/react';
 import AddTaskModal from './AddTaskModal';
 import TaskNode from './TaskNode';
 import { useFlowStore } from '../store';

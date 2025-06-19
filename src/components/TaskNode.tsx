@@ -1,6 +1,11 @@
-import { Handle, NodeProps, Position } from 'react-flow-renderer';
+import { Handle, NodeProps, Position } from '@xyflow/react';
 
-export default function TaskNode({ data }: NodeProps) {
+interface TaskNodeData {
+  label: string;
+  description?: string;
+}
+
+export default function TaskNode({ data }: NodeProps<TaskNodeData>) {
   return (
     <div className="bg-white p-2 rounded shadow-md border w-48">
       <h3 className="font-bold text-sm">{data.label}</h3>

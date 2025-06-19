@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Edge, Node } from 'react-flow-renderer';
+import { Edge, Node } from '@xyflow/react';
 
 interface FlowState {
   nodes: Node[];
