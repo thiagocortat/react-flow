@@ -46,7 +46,7 @@ export const flowTemplates: FlowTemplate[] = [
         type: 'transform',
         position: { x: 250, y: 0 },
         data: {
-          code: 'return data.map(u => ({ id: u.id, name: u.name, email: u.email }));',
+          code: 'return data.data.map(u => ({ id: u.id, name: u.name, email: u.email }));',
         },
       },
       { id: 'out1', type: 'output', position: { x: 500, y: 0 }, data: {} },

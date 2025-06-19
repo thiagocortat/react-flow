@@ -78,17 +78,19 @@ export default function ApiFlow() {
   const executeFlow = async () => {
     console.log('Executing flow...');
     resetResults();
-    const { setResult, results } = useExecutionStore.getState();
+    const { setResult } = useExecutionStore.getState();
+
+    const getResults = () => useExecutionStore.getState().results;
 
     const incoming = (id: string) => edges.filter((e) => e.target === id);
     const outgoing = (id: string) => edges.filter((e) => e.source === id);
 
     const getInput = (id: string) => {
       const first = incoming(id)[0];
-      return first ? results[first.source] : undefined;
+      return first ? getResults()[first.source] : undefined;
     };
 
-    const getInputs = (id: string) => incoming(id).map((e) => results[e.source]);
+    const getInputs = (id: string) => incoming(id).map((e) => getResults()[e.source]);
 
     const canRun = (id: string, executed: Set<string>) =>
       incoming(id).every((e) => executed.has(e.source));
