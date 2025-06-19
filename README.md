@@ -1,6 +1,6 @@
-# Task Flow
+# API Flow
 
-Exemplo de aplicativo de fluxo de tarefas utilizando React Flow e Vite.
+Aplicativo exemplo de orquestração de chamadas HTTP utilizando React Flow e Vite. Permite montar fluxos visuais de requisições, transformações e condições.
 
 ## Scripts
 

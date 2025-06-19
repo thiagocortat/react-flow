@@ -1,9 +1,9 @@
-import TaskFlow from './components/TaskFlow';
+import ApiFlow from './components/ApiFlow';
 
 function App() {
   return (
     <div className="w-screen h-screen">
-      <TaskFlow />
+      <ApiFlow />
     </div>
   );
 }

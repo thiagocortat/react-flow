@@ -1,16 +1,13 @@
 import { create } from 'zustand';
-import { Edge, Node } from '@xyflow/react';
-
-interface FlowState {
-  nodes: Node[];
-  edges: Edge[];
-  addNode: (node: Node) => void;
-  setEdges: (edges: Edge[]) => void;
+interface ExecutionState {
+  results: Record<string, any>;
+  setResult: (id: string, data: any) => void;
+  resetResults: () => void;
 }
 
-export const useFlowStore = create<FlowState>((set) => ({
-  nodes: [],
-  edges: [],
-  addNode: (node) => set((state) => ({ nodes: [...state.nodes, node] })),
-  setEdges: (edges) => set({ edges }),
+export const useExecutionStore = create<ExecutionState>((set) => ({
+  results: {},
+  setResult: (id, data) =>
+    set((state) => ({ results: { ...state.results, [id]: data } })),
+  resetResults: () => set({ results: {} }),
 }));
